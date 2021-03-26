@@ -24,10 +24,6 @@ public class Livre {
         this.genre = genre;
     }
 
-    public static void main(String[] args){
-
-    }
-
     public String getReference() {
         return reference;
     }
