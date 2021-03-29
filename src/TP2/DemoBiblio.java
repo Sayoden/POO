@@ -34,10 +34,13 @@ public class DemoBiblio {
 
         System.out.println(livre1.getExemplaires());
 
-        biblio.display();
-        biblio.removeLivre("2");
+        biblio.afficher();
+        biblio.afficheLivre("2");
+        biblio.suppLivre("2");
 
-        biblio.display();
+        biblio.afficher();
+
+
 
     }
 }

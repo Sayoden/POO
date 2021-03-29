@@ -1,8 +1,5 @@
 package TP2;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class Bibliotheque {
 
     private String nom;
@@ -22,28 +19,24 @@ public class Bibliotheque {
     }
 
     public void addLivre(Livre livre){
-        if(nbLivres == 0){
-            livres[0] = livre;
-            nbLivres++;
-            return;
-        }
-
         if((livre.getExemplaires() + nbExemplaires) > MAX_EXEMPLAIRES){
             System.out.println("Il y a déjà trop d'exemplaire dans cette bibliothèque.");
             return;
         }
 
         for(int i = 0; i < nbLivres; i++){
-            System.out.println(livres[i].getReference());
             if(livres[i].getReference().equals(livre.getReference())){
-                System.out.println("Livre avec la même reference trouvé, abandon.");
+                livres[i].addMultiplesExemplaires(livre.getExemplaires());
+                System.out.println("Livre avec la même reference trouvé.");
                 return;
             }
         }
 
-        System.out.println("La réference n'a pas été trouvé, implémentation du livre dans la bibliothèque");
-        livres[nbLivres] = livre;
-        nbLivres++;
+        if(nbLivres < MAX_LIVRE){
+            livres[nbLivres] = livre;
+            nbLivres++;
+            nbExemplaires += livre.getExemplaires();
+        }
     }
 
     public void addOneExemplaire(String reference){
@@ -61,34 +54,34 @@ public class Bibliotheque {
     }
 
     public void addMultiplesExemplaires(String reference, int nb){
-        if(nbExemplaires + nb <= MAX_EXEMPLAIRES){
-            for(int i = 0; i < nbLivres; i++){
-                if(livres[i].getReference().equals(reference)){
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(reference)){
+                if(nbExemplaires + nb <= MAX_EXEMPLAIRES) {
                     System.out.println("Livre avec la reference trouvé, ajout d'un exemplaire");
                     livres[i].addMultiplesExemplaires(nb);
                     return;
-                }
-            }
-        }else System.out.println("Il y a déjà trop d'exemplaire dans cette bibliothèque");
+                }else System.out.println("Il y a déjà trop d'exemplaire dans cette bibliothèque");
 
+            }
+        }
         System.out.println("La reference n'a pas été trouvé");
     }
 
-    public void removeLivre(String reference){
+    public void suppLivre(String reference){
         int emplacement;
         for(int i = 0; i < nbLivres; i++){
             if(livres[i].getReference().equals(reference)){
                 emplacement = i;
-                for(int y = emplacement; y < nbLivres; y++){
-                    livres[i] = livres[i + 1];
-                }
+                nbExemplaires -= livres[i].getExemplaires();
+                if (nbLivres - emplacement >= 0)
+                    System.arraycopy(livres, emplacement + 1, livres, emplacement, nbLivres - emplacement);
                 nbLivres--;
                 return;
             }
         }
     }
 
-    public void display(){
+    public void afficher(){
         System.out.println("Nombre de livre: "+nbLivres);
         for(int i = 0; i < nbLivres; i++){
             System.out.println(livres[i].getTitre());
@@ -99,12 +92,72 @@ public class Bibliotheque {
         for(int i = 0; i < nbLivres; i++){
             if(livres[i].getReference().equals(reference)){
                 if(livres[i].getExemplaires() <= 0 || (livres[i].getExemplaires() - 1) <= 0){
-                    removeLivre(reference);
+                    suppLivre(reference);
                     System.out.println("Le livre a été supprimé car il n'y avait plus d'exemplaire");
                 }else{
                     livres[i].removeExemplaire();
                 }
                 return;
+            }
+        }
+    }
+
+    public String getTitre(String ref) throws Exception{
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)){
+                return livres[i].getTitre();
+            }
+        }
+
+        throw new Exception("Erreur");
+    }
+
+    public Auteur getAuteur(String ref) throws Exception{
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)) return livres[i].getAuteur();
+        }
+
+        throw new Exception("Erreur");
+    }
+
+    public String getEditeur(String ref) throws Exception{
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)) return livres[i].getEditeur();
+        }
+
+        throw new Exception("Erreur");
+    }
+
+    public Livre.Genre getGenre(String ref) throws Exception{
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)) return livres[i].getGenre();
+        }
+
+        throw new Exception("Erreur");
+    }
+
+    public int getNbExemplaires(String ref) throws Exception{
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)) return livres[i].getExemplaires();
+        }
+
+        throw new Exception("Erreur");
+    }
+
+    public void afficheLivre(String ref){
+        for(int i = 0; i < nbLivres; i++){
+            if(livres[i].getReference().equals(ref)){
+                Livre livre = livres[i];
+
+                System.out.println("Reference: " + livre.getReference()
+                        + "," + "Editeur: " + livre.getEditeur()
+                        + "," + "Titre: " + livre.getTitre()
+                        + "," + "Auteur: " + livre.getAuteur().getNom()
+                        + "," + "Titre: " + livre.getTitre()
+                        + "," + "Genre: " + livre.getGenre().name()
+                        + "," + "Exemplaires: " + livre.getExemplaires()
+                );
+
             }
         }
     }
