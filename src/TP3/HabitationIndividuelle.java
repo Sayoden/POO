@@ -1,6 +1,6 @@
 package TP3;
 
-public class HabitationIndividuelle extends Habitation{
+public class HabitationIndividuelle extends Habitation {
 
     private boolean piscine;
     private double surface;
@@ -15,8 +15,8 @@ public class HabitationIndividuelle extends Habitation{
 
     @Override
     public double impot() {
-        if(piscine) return 2 * surface + (100 * nbPiece) + 500;
-        if(nbPiece != 0) return super.impot() + (100 * nbPiece);
+        if (piscine) return 2 * surface + (100 * nbPiece) + 500;
+        if (nbPiece > 0) return super.impot() + (100 * nbPiece);
         return super.impot();
     }
 
