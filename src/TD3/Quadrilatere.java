@@ -23,4 +23,18 @@ public class Quadrilatere extends FigureGeometrique{
                     super.distance(getTab()[1], getTab()[0]) * 2;
         }
     }
+
+    public class Carre extends Quadrilatere{
+
+        public Carre(Point p1, Point p2, Point p3) {
+            super(p1, p2, p3);
+        }
+
+        @Override
+        public double perimetre() {
+            return super.distance(getTab()[0], getTab()[1]) * 4;
+        }
+
+
+    }
 }
