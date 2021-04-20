@@ -28,11 +28,20 @@ public class CrayonGris extends Crayon{
         return mineType;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color color) throws ColorException{
+        if (color.equals(Color.GRAY)) {
+            this.color = color;
+        } else {
+            throw new ColorException("La couleur définie n'est pas la bonne");
+        }
     }
 
     public void setMineType(MineType mineType) {
         this.mineType = mineType;
+    }
+
+    @Override
+    public String affichageCrayon() {
+        return super.affichageCrayon() + ",Couleur: " + this.color + ",Type de mine: " + mineType.name();
     }
 }

@@ -25,5 +25,9 @@ public class Crayon {
         }
     }
 
+    public String affichageCrayon() {
+        return "Marque: " + this.marque + " ,Prix: " + this.prix;
+    }
+
 
 }
