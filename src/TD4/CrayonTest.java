@@ -12,8 +12,8 @@ public class CrayonTest {
             Crayon crayon = new Crayon("dadza", 6);
             crayon.setPrix(100);
 
-            CrayonGris crayonGris = new CrayonGris("", 6, Color.GRAY, MineType.HB);
-        } catch (PrixException | ColorException e) {
+            CrayonGris crayonGris = new CrayonGris(6, "", "H");
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
