@@ -1,4 +1,4 @@
-package TP5;
+package TP5.interfaces;
 
 import TP5.exceptions.AuteurException;
 

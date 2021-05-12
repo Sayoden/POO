@@ -1,9 +1,10 @@
 package TP5;
 
 import TP5.exceptions.AuteurException;
+import TP5.interfaces.Ouvrage;
 import lombok.Setter;
 
-public class Livre implements Ouvrage{
+public class Livre implements Ouvrage {
 
     private double largeur;
 

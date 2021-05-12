@@ -1,4 +1,4 @@
-package TP5;
+package TP5.interfaces;
 
 public interface Ouvrage extends Document, TroisD{
 
