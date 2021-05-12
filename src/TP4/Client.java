@@ -2,7 +2,7 @@ package TP4;
 
 import lombok.Getter;
 
-public class Client {
+public abstract class Client {
 
     @Getter
     private String reference, adresse;

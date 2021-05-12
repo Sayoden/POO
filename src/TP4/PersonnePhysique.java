@@ -10,9 +10,13 @@ public class PersonnePhysique extends Client{
     }
 
     private Genre genre;
+    private String nom;
+    private String prenom;
 
-    public PersonnePhysique(String reference, String adresse, Genre genre) {
+    public PersonnePhysique(String reference, String adresse, Genre genre, String nom, String prenom) {
         super(reference, adresse);
         this.genre = genre;
+        this.nom = nom;
+        this.prenom = prenom;
     }
 }

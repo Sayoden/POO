@@ -2,6 +2,8 @@ package TP4;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 public class Commandes implements ICommande {
 
     private String reference;
@@ -33,15 +35,16 @@ public class Commandes implements ICommande {
 
     @Override
     public boolean ajoutArticle(Article a) {
-        for (Article article : articles) {
-            if (article.getReference().equals(a.getReference())) {
-                return false;
-            }
-        }
-
         if (nbArticle + 1 <= MAX_ARTICLE) {
-            articles[nbArticle + 1] = a;
-            nbArticle++;
+            if (nbArticle != 0) {
+                for (Article article : this.articles) {
+                    if (article.getReference().equals(a.getReference())) {
+                        return false;
+                    }
+                }
+            }
+            this.articles[nbArticle] = a;
+            this.nbArticle++;
             return true;
         } else {
             return false;
@@ -51,13 +54,25 @@ public class Commandes implements ICommande {
     @Override
     public boolean suppressionArticle(String ref) {
         int emplacement;
-        for(int i = 0; i < nbArticle; i++){
-            if(articles[i].getReference().equals(ref)){
+        for(int i = 0; i < this.nbArticle; i++) {
+            if (this.articles[i].getReference().equals(ref)) {
                 emplacement = i;
-
+                if (nbArticle - emplacement >= 0)
+                    System.arraycopy(this.articles, emplacement + 1, this.articles, emplacement, this.nbArticle - emplacement);
+                nbArticle--;
+                return true;
             }
         }
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Commandes{" +
+                "reference='" + reference + '\'' +
+                ", client=" + client +
+                ", articles=" + Arrays.toString(articles) +
+                ", nbArticle=" + nbArticle +
+                '}';
+    }
 }
