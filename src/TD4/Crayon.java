@@ -2,10 +2,13 @@ package TD4;
 
 
 import TD4.exceptions.PrixException;
+import lombok.Getter;
 
 public class Crayon {
 
     private String marque;
+
+    @Getter
     private double prix;
 
     public Crayon(String marque, double prix) throws PrixException {

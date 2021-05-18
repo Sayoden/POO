@@ -9,8 +9,11 @@ public class Cmd {
     private static int incRef = 1;
 
     private int reference;
+
     private Client client;
+
     private String date;
+
     private Vector<LigneCmd> lignes;
 
     public Cmd(Client client, String date) {
@@ -25,19 +28,16 @@ public class Cmd {
         lignes.add(new LigneCmd(crayon, quantite));
     }
 
-    public void modifLigne(int indice, Crayon crayon, int quantite) throws Exception {
-        if (indice > lignes.size()) {
-            throw new Exception();
-        } else {
-            lignes.set(indice, new LigneCmd(crayon, quantite));
-        }
+    public void modifLigne(int indice, Crayon crayon, int quantite) throws Exception{
+        LigneCmd l = new LigneCmd(lignes.elementAt(indice).getCr(), quantite);
+        lignes.set(indice, l);
     }
 
-    public void calculeTotal() {
-        int prixTotal = 0;
-        this.lignes.forEach(ligne -> {
-            //ligne.getCr()
-        });
+    public double calculeTotal() {
+        double prixTotal = this.lignes.stream()
+                .mapToDouble(ligne -> ligne.getCr().getPrix() * ligne.getQuantite()).sum();
+
+        return prixTotal - (client.getRistoune() * prixTotal);
     }
 
     @Override
