@@ -2,6 +2,7 @@ package TP5;
 
 
 import TP5.exceptions.AuteurException;
+import TP5.interfaces.Document;
 import lombok.Getter;
 
 public class Article implements Document {
