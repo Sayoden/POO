@@ -18,11 +18,14 @@ public class Collection implements Ouvrage {
 
     private String editeur;
 
-    public Collection(String titre, String editeur) {
+    private int nbPages;
+
+    public Collection(String titre, String editeur, int nbPages) {
         this.articles = new ArrayList<>();
         this.auteurs = new ArrayList<>();
         this.titre = titre;
         this.editeur = editeur;
+        this.nbPages = nbPages;
     }
 
     public void ajoutArticle(Article article) {
@@ -37,7 +40,9 @@ public class Collection implements Ouvrage {
     }
 
     public void suppressionArticle(Article article) {
-
+        for (String auteur : article.getAuteurs()) {
+            suppresionAuteur(auteur);
+        }
         this.articles.remove(article);
     }
 
@@ -50,12 +55,12 @@ public class Collection implements Ouvrage {
 
     @Override
     public void suppresionAuteur(String auteur) {
-
+        this.auteurs.remove(auteur);
     }
 
     @Override
     public void nbPages(int nbPages) {
-
+        this.nbPages = this.articles.size();
     }
 
     @Override
@@ -65,21 +70,21 @@ public class Collection implements Ouvrage {
 
     @Override
     public int nbExemplaires() {
-        return 0;
+        return this.articles.size();
     }
 
     @Override
     public double getLargeur() {
-        return 0;
+        return 10;
     }
 
     @Override
     public double getLongeur() {
-        return 0;
+        return 10;
     }
 
     @Override
     public double getHauteur() {
-        return 0;
+        return 10;
     }
 }
