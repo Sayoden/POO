@@ -7,10 +7,13 @@ import lombok.Getter;
 
 public class Article implements Document {
 
+    @Getter
     private String titre;
 
+    @Getter
     private String[] auteurs;
 
+    @Getter
     private int nbAuteur;
 
     private static final int MAX_AUTEUR = 5;

@@ -36,17 +36,17 @@ public class Cmd {
     public double calculeTotal() {
         double prixTotal = this.lignes.stream()
                 .mapToDouble(ligne -> ligne.getCr().getPrix() * ligne.getQuantite()).sum();
-
         return prixTotal - (client.getRistoune() * prixTotal);
     }
 
     @Override
     public String toString() {
-        return "Cmd{" +
-                "reference=" + reference +
-                ", client=" + client +
-                ", date='" + date + '\'' +
-                ", lignes=" + lignes +
-                '}';
+       StringBuffer sb = new StringBuffer("Reference: " + this.reference + "\n Client: " + client.toString() + "\n Date: " + date);
+
+       for (LigneCmd l : lignes) {
+           sb.append(l.toString()).append("\n");
+       }
+
+       return new String(sb);
     }
 }
