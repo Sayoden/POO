@@ -65,7 +65,11 @@ public class Fleuriste implements IFleuriste {
 
     @Override
     public void ajoutFleur(String nomFleur, int qte) {
-
+        for (Fleur fleur : fleurs) {
+            if (fleur.getNom().equals(nomFleur)) {
+                return;
+            }
+        }
     }
 
     @Override
