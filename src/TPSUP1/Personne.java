@@ -28,72 +28,29 @@ public class Personne {
     /**
      * Si la personne est fils ou fille unique
      */
-    public Personne(String nom, String prenom, String nationalite, Date naissance, int age, int taille, double poids, String metier, boolean isStudent, String villeN){
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nationalite = nationalite;
-        this.naissance = naissance;
-        this.age = age;
-        this.nbFreres = 0;
-        this.nbSoeurs = 0;
-        this.taille = taille;
-        this.poids = poids;
-        this.metier = metier;
-        this.isStudent = isStudent;
-        this.villeN = villeN;
+    public Personne(String nom, String prenom, String nationalite, Date naissance, int age, int taille, double poids, String metier, boolean isStudent, String villeN) {
+        new Personne(nom, prenom, nationalite, naissance, age, 0, 0, taille, poids, metier, isStudent, villeN);
     }
 
     /**
      * Si la nationalité n'est pas connue
      */
-    public Personne(String nom, String prenom, Date naissance, int nbFreres, int nbSoeurs, int age, int taille, double poids, String metier, boolean isStudent, String villeN){
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nationalite = "Inconnue";
-        this.naissance = naissance;
-        this.age = age;
-        this.nbFreres = nbFreres;
-        this.nbSoeurs = nbSoeurs;
-        this.taille = taille;
-        this.poids = poids;
-        this.metier = metier;
-        this.isStudent = isStudent;
-        this.villeN = villeN;
+    public Personne(String nom, String prenom, Date naissance, int nbFreres, int nbSoeurs, int age, int taille, double poids, String metier, boolean isStudent, String villeN) {
+        new Personne(nom, prenom, "Inconnue", naissance, age, nbFreres, nbSoeurs, taille, poids, metier, isStudent, villeN);
     }
 
     /**
      * Si la personne n'a pas de métier
      */
     public Personne(String nom, String prenom, String nationalite, Date naissance, int age, int nbFreres, int nbSoeurs, int taille, double poids, boolean isStudent, String villeN) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nationalite = nationalite;
-        this.naissance = naissance;
-        this.age = age;
-        this.nbFreres = nbFreres;
-        this.nbSoeurs = nbSoeurs;
-        this.taille = taille;
-        this.poids = poids;
-        this.metier = "";
-        this.isStudent = isStudent;
-        this.villeN = villeN;
+        new Personne(nom, prenom, nationalite, naissance, age, nbFreres, nbSoeurs, taille, poids, null, isStudent, villeN);
     }
 
     /**
      * Si la ville de naissance n'est pas connnue
      */
     public Personne(String nom, String prenom, String nationalite, String metier, Date naissance, int age, int nbFreres, int nbSoeurs, int taille, double poids, boolean isStudent) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.nationalite = nationalite;
-        this.metier = metier;
-        this.naissance = naissance;
-        this.age = age;
-        this.nbFreres = nbFreres;
-        this.nbSoeurs = nbSoeurs;
-        this.taille = taille;
-        this.poids = poids;
-        this.isStudent = isStudent;
+        new Personne(nom, prenom, nationalite, naissance, age, nbFreres, nbSoeurs, taille, poids, metier, isStudent, "Inconnue");
     }
 
     public String getNom() {
@@ -192,7 +149,7 @@ public class Personne {
         isStudent = student;
     }
 
-    public void afficher(){
+    public void afficher() {
         System.out.println("Nom: " + getNom()
                 + "," + "Prénom: " + getPrenom()
                 + "," + "Date de naissance: " + getNaissance().toString()
