@@ -28,9 +28,7 @@ public class Exercice8 {
 
         }
 
-        if(nbvoy > nbcon) return true;
-
-        return false;
+        return nbvoy > nbcon;
 
     }
 }
